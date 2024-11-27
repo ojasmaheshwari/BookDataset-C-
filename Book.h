@@ -2,24 +2,25 @@
 
 #include <cstdint>
 #include <string>
+#include <utility>
 #include <vector>
 
 struct BookData {
-  std::string title, author, year, genre, userRating, reviews, price;
+  std::string title, author, userRating, reviews, price, year, genre;
 };
 
 class Book {
 public:
-  Book(BookData &data);
+  Book(BookData data);
 
   // Getters
-  inline std::string getTitle() const;
-  inline std::string getAuthor() const;
-  inline std::string getYear() const;
-  inline std::string getGenre() const;
-  inline std::string getUserRating() const;
-  inline std::string getReviewsCount() const;
-  inline std::string getPrice() const;
+  std::string getTitle() const;
+  std::string getAuthor() const;
+  std::string getYear() const;
+  std::string getGenre() const;
+  std::string getUserRating() const;
+  std::string getReviewsCount() const;
+  std::string getPrice() const;
 
   // Setters
   void setTitle(const std::string &title);
@@ -31,11 +32,7 @@ public:
   void setPrice(const std::string price);
 
   void printDetails() const;
-  uint32_t getBookCountByAuthor(std::string &author) const;
-  void printAllAuthors() const;
-  std::vector<std::string> getBooksByAuthor(std::string &author) const;
-  std::vector<Book> getBooksByRating(std::string &rating) const;
 
 private:
-  BookData &m_Data;
+  BookData m_Data;
 };

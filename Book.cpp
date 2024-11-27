@@ -1,15 +1,16 @@
 #include "Book.h"
 #include <iostream>
+#include <string>
 
-Book::Book(BookData &data) : m_Data(data) {}
+Book::Book(BookData data) : m_Data(data) {}
 
-inline std::string Book::getTitle() const { return m_Data.title; }
-inline std::string Book::getAuthor() const { return m_Data.author; }
-inline std::string Book::getYear() const { return m_Data.year; }
-inline std::string Book::getGenre() const { return m_Data.genre; }
-inline std::string Book::getUserRating() const { return m_Data.userRating; }
-inline std::string Book::getReviewsCount() const { return m_Data.reviews; }
-inline std::string Book::getPrice() const { return m_Data.price; }
+std::string Book::getTitle() const { return m_Data.title; }
+std::string Book::getAuthor() const { return m_Data.author; }
+std::string Book::getYear() const { return m_Data.year; }
+std::string Book::getGenre() const { return m_Data.genre; }
+std::string Book::getUserRating() const { return m_Data.userRating; }
+std::string Book::getReviewsCount() const { return m_Data.reviews; }
+std::string Book::getPrice() const { return m_Data.price; }
 
 void Book::setTitle(const std::string &title) { m_Data.title = title; }
 void Book::setAuthor(const std::string &author) { m_Data.author = author; }
