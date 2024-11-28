@@ -1,3 +1,0 @@
-/home/epicman/dev/cpp/OOP/BookDataset/build/CMakeFiles/main.dir
-/home/epicman/dev/cpp/OOP/BookDataset/build/CMakeFiles/edit_cache.dir
-/home/epicman/dev/cpp/OOP/BookDataset/build/CMakeFiles/rebuild_cache.dir
