@@ -1,5 +1,5 @@
-#include "DatasetReader.h"
-#include "Book.h"
+#include "includes/DatasetReader.h"
+#include "includes/Book.h"
 #include <cstdint>
 #include <iostream>
 #include <regex>
@@ -13,19 +13,36 @@ DatasetReader::DatasetReader(const std::string &filePath)
   m_FileStream.open(m_FilePath);
 
   std::string line;
-  std::regex delimeter(", ");
-  std::regex rule(".+,\\ .+,\\ .+,\\ .+,\\ .+,\\ .+,\\ .+");
+  std::regex delimeter(",");
+  std::regex rule(".+,.+,.+,.+,.+,.+,.+");
+
+  std::getline(m_FileStream, line);
 
   while (getline(m_FileStream, line)) {
-    bool isValid = std::regex_match(line.c_str(), rule);
+    // Handle comma inside double quotes of book title
+    std::vector<std::string> dataVec;
+    if (line.front() == '"') {
+      uint32_t quotationEndIdx = line.find('"', 1);
+      for (int i = 0; i <= quotationEndIdx; i++) {
+        if (line[i] == ',')
+          line[i] = '_';
+      }
+    }
 
-    if (!isValid)
+    // Handle carriage return breaking the regex validation
+    if (((int)(line.back())) == 13)
+      line.erase(line.size() - 1, 1);
+
+    bool isValid =
+        std::regex_match(line.c_str(), rule, std::regex_constants::match_any);
+    if (!isValid) {
+      std::cout << "INVALID: " << line.c_str() << '\n';
       continue;
+    }
 
     std::sregex_token_iterator it(line.begin(), line.end(), delimeter, -1);
     std::sregex_token_iterator end;
 
-    std::vector<std::string> dataVec;
     while (it != end) {
       dataVec.emplace_back(*it);
       ++it;
